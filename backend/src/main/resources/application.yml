@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: estore-backend
+
+  datasource:
+    url: jdbc:h2:file:./data/estore;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/estore
+
+  sql:
+    init:
+      mode: always
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+jwt:
+  secret: ${JWT_SECRET:eStore2026SuperSecretKeyForJwtTokenGenerationMustBeAtLeast256Bits!}
+  expiration: 86400000
+
+logging:
+  level:
+    com.estore: INFO
+    org.springframework.security: WARN
